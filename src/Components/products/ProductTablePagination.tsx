@@ -15,18 +15,18 @@ import {
     SelectValue,
 } from '@/Components/ui/select';
 
-interface DataTablePaginationProps<TData> {
+interface ProductTablePaginationProps<TData> {
     table: Table<TData>;
 }
 
 export function ProductTablePagination<TData>({
     table,
-}: DataTablePaginationProps<TData>) {
+}: ProductTablePaginationProps<TData>) {
     return (
         <div className="flex items-center justify-between px-2">
             <div className="text-muted-foreground flex-1 text-sm">
-                {table.getFilteredSelectedRowModel().rows.length} of{' '}
-                {table.getFilteredRowModel().rows.length} row(s) selected.
+                Showing {table.getRowModel().rows.length} of{' '}
+                {table.getPreFilteredRowModel().rows.length} results
             </div>
             <div className="flex items-center space-x-6 lg:space-x-8">
                 <div className="flex items-center space-x-2">

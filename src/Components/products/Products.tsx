@@ -2,55 +2,66 @@ import { useProducts } from '@/hooks/useProductQuery';
 import { useState } from 'react';
 import { ProductTable } from './ProductTable';
 import { columns } from './columns';
-import { getCoreRowModel, useReactTable } from '@tanstack/react-table';
+import {
+    getCoreRowModel,
+    useReactTable,
+    getPaginationRowModel,
+    getFilteredRowModel,
+    type ColumnFiltersState,
+    type SortingState,
+    getSortedRowModel,
+} from '@tanstack/react-table';
 import { ProductTablePagination } from './ProductTablePagination';
 import { Input } from '../ui/input';
+import AddProduct from './AddProduct';
 
 const Products = () => {
-    const [pagination, setPagination] = useState({
-        pageIndex: 0,
-        pageSize: 10,
-    });
+    const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
+    const [sorting, setSorting] = useState<SortingState>([]);
 
-    const limit = pagination?.pageSize;
-    const page = pagination?.pageIndex;
-
-    const [searchQuery, setSearchQuery] = useState('');
-
-    const { data, isLoading, error } = useProducts(limit, page, searchQuery);
-
-    const totalProduct: number = data?.total ?? 0;
+    const { data, isLoading, error } = useProducts(0, 1, '');
 
     const table = useReactTable({
-        data: data?.products,
+        data: data?.products || [],
         columns,
-        rowCount: totalProduct,
-        state: {
-            pagination,
-        },
-        onPaginationChange: setPagination,
         getCoreRowModel: getCoreRowModel(),
-        manualPagination: true,
+        getPaginationRowModel: getPaginationRowModel(),
+        getFilteredRowModel: getFilteredRowModel(),
+        onColumnFiltersChange: setColumnFilters,
+        onSortingChange: setSorting,
+        getSortedRowModel: getSortedRowModel(),
+        state: {
+            columnFilters,
+            sorting,
+        },
+        initialState: {
+            pagination: {
+                pageSize: 10,
+            },
+        },
     });
 
     if (isLoading) return <div>Loading...</div>;
     if (error) return <div>Error loading products</div>;
 
-    const handleSearch = (query: string) => {
-        setSearchQuery(query);
-        setPagination((prev) => ({ ...prev, pageIndex: 0 })); // Reset to first page
-    };
-
     return (
         <div>
-            <div className="flex items-center py-4">
+            <div className="flex items-center justify-between py-4">
                 <Input
                     placeholder="Search products..."
-                    value={searchQuery}
-                    onChange={(e) => handleSearch(e.target.value)}
+                    value={
+                        (table
+                            .getColumn('title')
+                            ?.getFilterValue() as string) ?? ''
+                    }
+                    onChange={(e) =>
+                        table.getColumn('title')?.setFilterValue(e.target.value)
+                    }
                     className="max-w-sm"
                 />
+                <AddProduct />
             </div>
+
             <ProductTable columns={columns} table={table} />
             <ProductTablePagination table={table} />
         </div>

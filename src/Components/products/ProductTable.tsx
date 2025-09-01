@@ -19,8 +19,20 @@ export function ProductTable<TData, TValue>({
     table,
 }: ProductTableProps<TData, TValue>) {
     return (
-        <div className="overflow-hidden rounded-md border">
+        <div className="overflow-hidden rounded border">
             <Table>
+                <colgroup>
+                    {columns.map((column, index) => (
+                        <col
+                            key={index}
+                            style={{
+                                width: column.size
+                                    ? `${column.size}px`
+                                    : 'auto',
+                            }}
+                        />
+                    ))}
+                </colgroup>
                 <TableHeader>
                     {table.getHeaderGroups().map((headerGroup) => (
                         <TableRow key={headerGroup.id}>

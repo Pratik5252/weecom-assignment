@@ -1,5 +1,5 @@
 import Layout from './Components/layout/Layout';
-import Products from './Components/Products';
+import Products from './Components/products/Products';
 import './App.css';
 
 const App = () => {

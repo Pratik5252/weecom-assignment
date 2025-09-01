@@ -3,10 +3,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
-* {
+/* * {
     margin: 0;
     padding: 0;
-}
+} */
 
 @theme inline {
     --radius-sm: calc(var(--radius) - 4px);

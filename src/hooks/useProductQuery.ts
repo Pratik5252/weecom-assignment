@@ -28,7 +28,8 @@ export const useProducts = (
 export const useAddProduct = () => {
     const queryClient = useQueryClient();
     return useMutation({
-        mutationFn: (product: Partial<Product>) => addProduct(product),
+        mutationFn: ({ product }: { product: Partial<Product> }) =>
+            addProduct(product),
         onSuccess: (newProduct) => {
             queryClient.setQueriesData(
                 { queryKey: ['products'] },

@@ -6,7 +6,12 @@ import {
     type Product,
     type ProductResponse,
 } from '@/api/api';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import {
+    keepPreviousData,
+    useMutation,
+    useQuery,
+    useQueryClient,
+} from '@tanstack/react-query';
 
 export const useProducts = (
     limit: number,
@@ -14,8 +19,9 @@ export const useProducts = (
     searchQuery: string = ''
 ) => {
     return useQuery<ProductResponse>({
-        queryKey: ['products', limit, page],
+        queryKey: ['products', limit, page, searchQuery],
         queryFn: () => getProducts(limit, page, searchQuery),
+        placeholderData: keepPreviousData,
     });
 };
 

@@ -17,8 +17,10 @@ import {
 import { ProductTablePagination } from './ProductTablePagination';
 import { Input } from '../ui/input';
 import AddProduct from './AddProduct';
+import CategoryFilter from './filters/CategoryFilter';
 import { Skeleton } from '../ui/skeleton';
 import { Bug } from 'lucide-react';
+// import { PriceRangeFilter } from './filters/PriceRangeFilter';
 
 const Products = () => {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -103,6 +105,14 @@ const Products = () => {
                             }
                             className="max-w-sm"
                         />
+                        <div className="sm:hidden flex gap-2">
+                            <CategoryFilter
+                                column={table.getColumn('category')!}
+                            />
+                            {/* <PriceRangeFilter
+                                column={table.getColumn('price')!}
+                            /> */}
+                        </div>
                     </div>
                     <AddProduct />
                 </div>

@@ -12,6 +12,7 @@ import {
     useQuery,
     useQueryClient,
 } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
 export const useProducts = (
     limit: number,
@@ -46,7 +47,9 @@ export const useAddProduct = () => {
                     };
                 }
             );
+            toast.success('Product Added');
         },
+        onError: () => toast.error('Error adding product'),
     });
 };
 
@@ -73,7 +76,9 @@ export const useUpdateProduct = () => {
                     };
                 }
             );
+            toast.success('Product Updated');
         },
+        onError: () => toast.error('Error updating product'),
     });
 };
 
@@ -93,6 +98,8 @@ export const useDeleteProduct = () => {
                     };
                 }
             );
+            toast.success('Product Deleted');
         },
+        onError: () => toast.error('Error deleting product'),
     });
 };

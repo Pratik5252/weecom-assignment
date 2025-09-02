@@ -105,7 +105,7 @@ const Products = () => {
                             }
                             className="max-w-sm"
                         />
-                        <div className="sm:hidden flex gap-2">
+                        <div className="md:hidden flex gap-2">
                             <CategoryFilter
                                 column={table.getColumn('category')!}
                             />

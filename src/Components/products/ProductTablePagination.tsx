@@ -23,7 +23,7 @@ export function ProductTablePagination<TData>({
     table,
 }: ProductTablePaginationProps<TData>) {
     return (
-        <div className="flex items-center justify-between px-2">
+        <div className="flex items-center justify-between px-2 mt-2">
             <div className="text-muted-foreground flex-1 text-sm">
                 Showing {table.getRowModel().rows.length} of{' '}
                 {table.getPreFilteredRowModel().rows.length} results
@@ -45,7 +45,7 @@ export function ProductTablePagination<TData>({
                             />
                         </SelectTrigger>
                         <SelectContent side="top">
-                            {[10, 20, 25, 30, 40, 50].map((pageSize) => (
+                            {[5, 10, 20, 25, 30, 40, 50].map((pageSize) => (
                                 <SelectItem
                                     key={pageSize}
                                     value={`${pageSize}`}

@@ -9,7 +9,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuLabel,
 } from '@/Components/ui/dropdown-menu';
-import { Filter, ChevronDown } from 'lucide-react';
+import { Filter, ChevronDown, ListFilterPlus } from 'lucide-react';
 import { type Product } from '@/api/api';
 import { useMemo } from 'react';
 
@@ -47,15 +47,13 @@ function CategoryFilter({ column }: CategoryFilterProps) {
     return (
         <DropdownMenu>
             <DropdownMenuTrigger asChild>
-                <Button variant="outline">
-                    <Filter className="mr-2 h-4 w-4" />
-                    Categories
+                <Button variant="ghost" className="">
+                    <ListFilterPlus className="h-4 w-4" />
                     {selectedCategories.length > 0 && (
-                        <span className="ml-2 bg-primary text-primary-foreground rounded-full px-2 py-0.5 text-xs">
+                        <span className="bg-primary text-primary-foreground rounded-full px-2 py-0.5 text-xs">
                             {selectedCategories.length}
                         </span>
                     )}
-                    <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56" align="start">

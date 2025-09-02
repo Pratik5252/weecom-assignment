@@ -1,69 +1,94 @@
-# React + TypeScript + Vite
+# Weecom Products Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A small React + TypeScript + Vite application demonstrating product CRUD, client-/server-side pagination, sorting and filtering with TanStack Table, data fetching/mutations with React Query, and a fixed-header table UI built with Tailwind CSS and Shadcn UI components.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Setup Instructions
 
-## Expanding the ESLint configuration
+1. **Prerequisites**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+    - Node.js ≥ 16
+    - npm or yarn
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+2. **Clone & Install**
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+    ```bash
+    git clone https://github.com/your-org/weecom.git
+    cd weecom
+    npm install
+    # or
+    yarn install
+    ```
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+3. **Run in Development**
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+    ```bash
+    npm run dev
+    # or
+    yarn dev
+    ```
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+4. **Build & Preview**
+    ```bash
+    npm run build
+    npm run preview
+    # or
+    yarn build
+    yarn preview
+    ```
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
+
+## 📚 Libraries Used
+
+-   **Framework & Tooling**
+
+    -   React 18
+    -   Vite
+    -   TypeScript
+
+-   **Data Fetching & State**
+
+    -   `@tanstack/react-query` – server state, caching & mutations
+    -   `@tanstack/react-table` – headless table, pagination, filtering, sorting, faceting
+
+-   **UI & Styling**
+
+    -   Tailwind CSS
+    -   Shadcn UI (Dialog, Table, Button, Input, Select, DropdownMenu, ScrollArea, Popover)
+    -   `lucide-react` – icons
+
+-   **Utilities**
+    -   Fetch API (with simulated delays)
+    -   Custom hooks under `src/hooks/useProductQuery.ts`
+
+---
+
+## 📝 Approach Overview
+
+1. **Data Layer**
+
+    - Wrapped all CRUD calls (`getProducts`, `addProduct`, `updateProduct`, `deleteProduct`) behind React Query mutations & queries.
+    - Simulated network latency with `setTimeout` for realistic loading states.
+
+2. **Table Implementation**
+
+    - Used TanStack Table’s `useReactTable` for core, pagination, sorting, filtering and faceting.
+    - Server-side pagination on initial load; demonstrated client-side pagination in `Products.tsx` with `getFilteredRowModel` & `getPaginationRowModel`.
+    - Implemented a **fixed header** by splitting header & body into two tables sharing identical `<colgroup>` widths inside a scroll container.
+
+3. **Filtering & Facets**
+
+    - Title search: client-side text filter (`setFilterValue`) with debounced input.
+    - Category filter: generated via `getFacetedUniqueValues()`; multi-select dropdown with checkboxes for OR-logic filtering.
+    - “Select All” / “Clear” quick actions for category filters.
+
+4. **UX Details**
+    - Edit & Delete dialogs using Shadcn UI Dialog component.
+    - Loading, success, and error states handled gracefully.
+    - Fully responsive, accessible controls with keyboard support.
+
+---
+
+Feel free to explore the code under `src/Components/products` and `src/hooks`. Contributions and feedback are welcome!

@@ -24,13 +24,15 @@ export function ProductTablePagination<TData>({
 }: ProductTablePaginationProps<TData>) {
     return (
         <div className="flex items-center justify-between px-2 mt-2">
-            <div className="text-muted-foreground flex-1 text-sm">
+            <div className="text-muted-foreground flex-1 md:text-sm text-xs">
                 Showing {table.getRowModel().rows.length} of{' '}
                 {table.getPreFilteredRowModel().rows.length} results
             </div>
             <div className="flex items-center space-x-6 lg:space-x-8">
                 <div className="flex items-center space-x-2">
-                    <p className="text-sm font-medium">Rows per page</p>
+                    <p className="md:text-sm text-xs  font-medium">
+                        Rows per page
+                    </p>
                     <Select
                         value={`${table.getState().pagination.pageSize}`}
                         onValueChange={(value) => {

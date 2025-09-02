@@ -9,6 +9,7 @@ import {
     TableRow,
 } from '@/Components/ui/table';
 import { ScrollArea } from '@/Components/ui/scroll-area';
+import { PackageSearch } from 'lucide-react';
 
 interface ProductTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
@@ -76,9 +77,12 @@ export function ProductTable<TData, TValue>({
                                 <TableRow>
                                     <TableCell
                                         colSpan={columns.length}
-                                        className="h-24 text-center"
+                                        className="h-32"
                                     >
-                                        No results.
+                                        <div className="flex flex-col items-center justify-center h-full text-muted-foreground">
+                                            <PackageSearch size={44} />
+                                            No results found.
+                                        </div>
                                     </TableCell>
                                 </TableRow>
                             )}
@@ -158,6 +162,7 @@ export function ProductTable<TData, TValue>({
                     })
                 ) : (
                     <div className="text-center py-12 text-muted-foreground">
+                        <PackageSearch size={44} />
                         No results found.
                     </div>
                 )}

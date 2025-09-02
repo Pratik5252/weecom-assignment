@@ -14,14 +14,10 @@ import {
 } from '@tanstack/react-query';
 import { toast } from 'sonner';
 
-export const useProducts = (
-    limit: number,
-    page: number,
-    searchQuery: string = ''
-) => {
+export const useProducts = (limit: number, page: number) => {
     return useQuery<ProductResponse>({
-        queryKey: ['products', limit, page, searchQuery],
-        queryFn: () => getProducts(limit, page, searchQuery),
+        queryKey: ['products', limit, page],
+        queryFn: () => getProducts(limit, page),
         placeholderData: keepPreviousData,
     });
 };

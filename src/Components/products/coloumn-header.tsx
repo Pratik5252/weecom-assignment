@@ -2,7 +2,7 @@ import { type Column } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
-import { Button } from '@/Components/ui/button';
+
 
 interface DataTableColumnHeaderProps<TData, TValue>
     extends React.HTMLAttributes<HTMLDivElement> {
@@ -21,16 +21,15 @@ export function DataTableColumnHeader<TData, TValue>({
 
     return (
         <div className={cn('flex items-end gap-2', className)}>
-            <Button
-                variant="ghost"
+            <div
                 onClick={() =>
                     column.toggleSorting(column.getIsSorted() === 'asc')
                 }
-                className="!p-0"
+                className="!p-0 hover:bg-none flex cursor-pointer select-none items-center gap-1.5 rounded-md transition-colors"
             >
                 {title}
                 <ArrowUpDown className="ml-2 h-4 w-4" />
-            </Button>
+            </div>
         </div>
     );
 }

@@ -17,8 +17,7 @@ import {
 import { ProductTablePagination } from './ProductTablePagination';
 import { Input } from '../ui/input';
 import AddProduct from './AddProduct';
-import CategoryFilter from './CategoryFilter';
-import { ScrollArea } from '../ui/scroll-area';
+import CategoryFilter from './filters/CategoryFilter';
 
 const Products = () => {
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -57,8 +56,14 @@ const Products = () => {
 
     return (
         <div className="w-full h-fit py-2 px-6">
-            <div className="mt-4">
-                <h1 className="text-4xl font-semibold">Welcome User</h1>
+            <div className="mt-2">
+                <div>
+                    <h1 className="text-4xl font-semibold">Welcome!</h1>
+                    <h3 className="text-md font-medium mt-1 text-muted-foreground">
+                        Browse and manage your products below
+                    </h3>
+                </div>
+                <div className="">Total Product</div>
             </div>
             <div className="h-fit lex flex-col items-center py-4">
                 <div className="flex items-center justify-between gap-2 w-full mb-2">
@@ -81,9 +86,7 @@ const Products = () => {
                     </div>
                     <AddProduct />
                 </div>
-                <ScrollArea className="h-[520px] w-full">
-                    <ProductTable columns={columns} table={table} />
-                </ScrollArea>
+                <ProductTable columns={columns} table={table} />
                 <ProductTablePagination table={table} />
             </div>
         </div>

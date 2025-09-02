@@ -6,7 +6,18 @@ import { DataTableColumnHeader } from './coloumn-header';
 
 export const columns: ColumnDef<Product>[] = [
     { accessorKey: 'title', header: 'Title', size: 350 },
-    { accessorKey: 'category', header: 'Category', size: 150 },
+    {
+        accessorKey: 'category',
+        header: 'Category',
+        size: 150,
+        filterFn: (row, id, value) => {
+            if (!value || !Array.isArray(value) || value.length === 0) {
+                return true;
+            }
+            const rowValue = row.getValue(id) as string;
+            return value.includes(rowValue);
+        },
+    },
     {
         accessorKey: 'price',
         header: ({ column }) => (

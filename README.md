@@ -91,4 +91,4 @@ A small React + TypeScript + Vite application demonstrating product CRUD, client
 
 ---
 
-Feel free to explore the code under `src/Components/products` and `src/hooks`. Contributions and feedback are welcome!
+Feel free to explore the code under `src/Components/products` and `src/hooks`.

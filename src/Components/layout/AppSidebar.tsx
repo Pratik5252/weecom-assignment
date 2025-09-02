@@ -61,8 +61,8 @@ export function AppSidebar() {
     const { isMobile } = useSidebar();
     return (
         <Sidebar
-            variant="sidebar"
-            collapsible="icon"
+            variant="floating"
+            collapsible="offcanvas"
             className="overflow-hidden"
         >
             <SidebarHeader>

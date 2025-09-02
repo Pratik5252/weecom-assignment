@@ -57,10 +57,8 @@ const EditProduct = ({ product }: EditProductProps) => {
     };
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger>
-                <Button variant="ghost" className="cursor-pointer">
-                    Edit
-                </Button>
+            <DialogTrigger className="bg-primary text-accent border px-3 py-1 rounded cursor-pointer">
+                Edit
             </DialogTrigger>
             <DialogContent showCloseButton={false}>
                 <DialogHeader>

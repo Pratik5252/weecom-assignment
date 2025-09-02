@@ -54,7 +54,7 @@ const AddProduct = () => {
     };
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className="flex items-center justify-center text-sm font-medium gap-1 py-2 px-4 cursor-pointer border rounded">
+            <DialogTrigger className="flex items-center justify-center text-sm font-medium gap-1 py-2 px-4 cursor-pointer border rounded-md border-border hover:bg-accent hover:text-primary  transition-colors">
                 Add <Plus size={16} />
             </DialogTrigger>
             <DialogContent showCloseButton={false}>

@@ -13,7 +13,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <SidebarInset>
                 <main>
                     <Toaster />
-                    <div className='flex items-center gap-2 border-b py-2'>
+                    <div className='flex items-center gap-2 border-b py-2 px-6'>
                         <SidebarTrigger />
                         <p>Dashboard</p>
                     </div>

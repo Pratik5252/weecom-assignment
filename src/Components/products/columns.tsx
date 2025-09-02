@@ -5,7 +5,15 @@ import DeleteProduct from './DeleteProduct';
 import { DataTableColumnHeader } from './coloumn-header';
 
 export const columns: ColumnDef<Product>[] = [
-    { accessorKey: 'title', header: 'Title', size: 350 },
+    {
+        accessorKey: 'title',
+        header: 'Title',
+        size: 350,
+        cell: ({ row }) => {
+            const title = row.getValue('title') as string;
+            return <div className="rounded-md text-xs">{title}</div>;
+        },
+    },
     {
         accessorKey: 'category',
         header: 'Category',
@@ -16,6 +24,14 @@ export const columns: ColumnDef<Product>[] = [
             }
             const rowValue = row.getValue(id) as string;
             return value.includes(rowValue);
+        },
+        cell: ({ row }) => {
+            const category = row.getValue('category') as string;
+            return (
+                <div className="border w-fit py-0.5 px-1 rounded-md text-xs bg-accent text-primary">
+                    {category}
+                </div>
+            );
         },
     },
     {
@@ -29,7 +45,7 @@ export const columns: ColumnDef<Product>[] = [
                 style: 'currency',
                 currency: 'USD',
             }).format(price);
-            return <div>{formatted}</div>;
+            return <div className="rounded-md text-xs">{formatted}</div>;
         },
         size: 100,
     },
@@ -39,6 +55,10 @@ export const columns: ColumnDef<Product>[] = [
             <DataTableColumnHeader column={column} title="Stock" />
         ),
         size: 80,
+        cell: ({ row }) => {
+            const stock = row.getValue('stock') as number;
+            return <div className="rounded-md text-xs">{stock}</div>;
+        },
     },
     {
         id: 'action',
@@ -47,7 +67,7 @@ export const columns: ColumnDef<Product>[] = [
             const product = row.original;
 
             return (
-                <div className="flex items-center gap-3">
+                <div className="flex items-center gap-3 ">
                     <EditProduct product={product} />
                     <DeleteProduct id={product.id} />
                 </div>

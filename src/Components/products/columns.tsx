@@ -3,6 +3,8 @@ import { type ColumnDef } from '@tanstack/react-table';
 import EditProduct from './EditProduct';
 import DeleteProduct from './DeleteProduct';
 import { DataTableColumnHeader } from './coloumn-header';
+import CategoryFilter from './filters/CategoryFilter';
+import { PriceRangeFilter } from './filters/PriceRangeFilter';
 
 export const columns: ColumnDef<Product>[] = [
     {
@@ -16,7 +18,13 @@ export const columns: ColumnDef<Product>[] = [
     },
     {
         accessorKey: 'category',
-        header: 'Category',
+        header: ({ column }) => {
+            return (
+                <div className='flex items-center'>
+                    Category <CategoryFilter column={column} />
+                </div>
+            );
+        },
         size: 150,
         filterFn: (row, id, value) => {
             if (!value || !Array.isArray(value) || value.length === 0) {
@@ -37,7 +45,10 @@ export const columns: ColumnDef<Product>[] = [
     {
         accessorKey: 'price',
         header: ({ column }) => (
-            <DataTableColumnHeader column={column} title="Price" />
+            <div className="flex items-center">
+                <DataTableColumnHeader column={column} title="Price" />
+                <PriceRangeFilter column={column} />
+            </div>
         ),
         cell: ({ row }) => {
             const price = parseFloat(row.getValue('price'));
@@ -46,6 +57,14 @@ export const columns: ColumnDef<Product>[] = [
                 currency: 'USD',
             }).format(price);
             return <div className="rounded-md text-xs">{formatted}</div>;
+        },
+        filterFn: (row, id, value) => {
+            // Handle price range filtering
+            if (!value || !Array.isArray(value) || value.length !== 2) {
+                return true;
+            }
+            const price = parseFloat(row.getValue(id));
+            return price >= value[0] && price <= value[1];
         },
         size: 100,
     },

@@ -9,7 +9,7 @@ import {
     DropdownMenuSeparator,
     DropdownMenuLabel,
 } from '@/Components/ui/dropdown-menu';
-import { Filter, ChevronDown, ListFilterPlus } from 'lucide-react';
+import { ListFilterPlus } from 'lucide-react';
 import { type Product } from '@/api/api';
 import { useMemo } from 'react';
 

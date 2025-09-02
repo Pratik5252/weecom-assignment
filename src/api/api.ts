@@ -13,19 +13,19 @@ export type ProductResponse = {
     limit: number;
 };
 
+export const delay = (ms: number) =>
+    new Promise((resolve) => setTimeout(resolve, ms));
+
 //All products
 export const getProducts = async (
     limit: number,
-    page: number,
-    searchQuery: string = ""
+    page: number
 ): Promise<ProductResponse> => {
     const skip = (page - 1) * limit;
-    console.log(searchQuery);
 
-    const baseUrl = searchQuery
-        ? `https://dummyjson.com/products/search?q=${searchQuery}&`
-        : `https://dummyjson.com/products`;
+    const baseUrl = `https://dummyjson.com/products`;
     try {
+        await delay(1000);
         const response = await fetch(
             `${baseUrl}?limit=${limit}&skip=${skip}&select=title,price,category,stock`
         );
@@ -43,6 +43,7 @@ export const getProducts = async (
 //Add product
 export const addProduct = async (product: Partial<Product>) => {
     try {
+        await delay(1000);
         const response = await fetch('https://dummyjson.com/products/add', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -62,6 +63,7 @@ export const addProduct = async (product: Partial<Product>) => {
 //Update a product
 export const updateProduct = async (id: number, product: Partial<Product>) => {
     try {
+        await delay(1000);
         const response = await fetch(`https://dummyjson.com/products/${id}`, {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
@@ -81,6 +83,7 @@ export const updateProduct = async (id: number, product: Partial<Product>) => {
 //Delete a product
 export const deleteProduct = async (id: number) => {
     try {
+        await delay(1000);
         const response = await fetch(`https://dummyjson.com/products/${id}`, {
             method: 'DELETE',
         });

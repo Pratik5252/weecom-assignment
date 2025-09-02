@@ -27,7 +27,7 @@ const DeleteProduct = ({ id }: { id: number }) => {
 
     return (
         <Dialog open={open} onOpenChange={setOpen}>
-            <DialogTrigger className=" p-2 rounded cursor-pointer hover:bg-red-100 hover:text-red-500">
+            <DialogTrigger className=" p-2 rounded cursor-pointer hover:bg-destructive hover:text-destructive-foreground transition-colors">
                 <Trash size={16} />
             </DialogTrigger>
             <DialogContent showCloseButton={false}>
